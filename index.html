@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>GifTastic</title>
+    <title>Train Scheduler</title>
     
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -16,12 +16,61 @@
 </head>
 <body>
     
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid text-center bg-dark text-white">
         <div class="container">
-          <h1 class="display-4">Fluid jumbotron</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <h1 class="display-4">Union Station</h1>
+          <h3>Washington D.C.</h3>
         </div>
       </div>
+
+      <div class="card m-3">
+        <h5 class="card-title text-white bg-info text-center">Train Schedule</h5>
+        <table class="table table-hover" id="train-table">
+            <thead>
+                <tr>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="card m-3">
+        <h5 class="card-title text-white bg-info text-center">Add Train</h5>
+        <form>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Train Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Train Name">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Destination</label>
+                <input type="text" class="form-control" id="destination" placeholder="City Name">
+            </div>
+        </form>
+        <form>
+            <div class="form-group">
+                <label for="formGroupExampleInput">First Train Time (HH:mm - Military Time)</label>
+                <input type="text" class="form-control" id="time" placeholder="i.e. 14:00 = 2pm">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Frequency (min)</label>
+                <input type="text" class="form-control" id="frequency" placeholder="Minutes">
+            </div>
+            <input class="btn btn-primary mt-3 mb-3 ml-3" id="submit" type="submit" value="Submit">
+        </form>
+    </div>
+
+
+
+</div>
+
 
 
 
