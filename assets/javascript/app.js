@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 var database = firbase.database();
 
 //Add click event for button to add train
-$("#submitButton").on("click", function(event) {
+$("#submit-Button").on("click", function(event) {
     event.preventDefault();
     console.log("working button")
 
@@ -49,7 +49,25 @@ $("#frequency").val("");
 });
 
 //Need to create event to add new info to database insert train info to html maybe childsnapshot
+database.ref().on("child_added", function(childSnapshot, prevChildKey){
+   
+   // Need to store snapshot in variables
+    var nameTrain = childSnapshot.val().name;
+    var trainDestination = childSnapshot.val().destination;
+    var trainTime = childSnapshot.val().time;
+    var trainFrequency = childSnapshot.val().frequency;
 
+    // log train information
+    console.log("new train" + nameTrain);
+    console.log("destination" + trainDestination);
+    console.log("time" + trainTime);
+    console.log("frequency" + trainFrequency);
+
+$("#train-table > tbody").append("<tr><td>" + nameTrain + "</td><td>" + trainDestination + 
+"</td><td>" + trainFrequency + "</td><td>" + trainTime + "</td></tr>");
+    
+
+});
 
 // Need to create logic for train next train arrival
 
