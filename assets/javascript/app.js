@@ -1,16 +1,16 @@
 // Get Firebase ready
 var config = {
-   apiKey: "",
+   apiKey: "AIzaSyAj1jUpsI8KD_JgtfcvC6ucNNQm39cOIAI",
    authDomain: "train-scheduler-ae73f.firebaseio.com",
-   databaseURL: "https://train-scheduler-ae73f.firebaseio.com",
+   databaseURL: "https://train-scheduler-ae73f.firebaseio.com/",
    projectID: "train-scheduler-ae73f",
    storageBucket: "train-scheduler-ae73f.appspot.com",
-   messagingSenderID: "",
+   messagingSenderID: "613930892305",
 };
 
 firebase.initializeApp(config);
 
-var database = firbase.database();
+var database = firebase.database();
 
 //Add click event for button to add train
 $("#submit-Button").on("click", function(event) {
@@ -20,7 +20,7 @@ $("#submit-Button").on("click", function(event) {
 //Need to pull users input
 var trainName = $("#name").val().trim();
 var destination = $("#destination").val().trim();
-var trainTime = moment($("#time").val().trim(), "HH/mm").format("T");
+var trainTime = moment($("#time").val().trim(), "HH/mm").format("10:00");
 var frequency = $("#frequency").val().trim();
 
 //create a local or temproary object to contain train user info
@@ -64,8 +64,31 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
     console.log("frequency" + trainFrequency);
 
 $("#train-table > tbody").append("<tr><td>" + nameTrain + "</td><td>" + trainDestination + 
-"</td><td>" + trainFrequency + "</td><td>" + trainTime + "</td></tr>");
+"</td><td>" + trainFrequency + "</td><td>" + trainTime + "</td></tr>" + 
+nextTrain + "</td></tr>" );
     
+tFrequency = 5;
+
+var firstTime = "06:00";
+
+var firstTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
+console.log(firstTimeConverted)
+
+var currentTime = moment();
+console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+console.log("DIFFERENCE IN TIME: " + diffTime);
+
+var tRemainder = diffTime % trainFrequency;
+console.log(tRemainder);
+
+var tMinutesTillTrain = trainFrequency - tRemainder;
+console.log("Minutes till Train: " + tMinutesTillTrain);
+
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
 
 });
 
