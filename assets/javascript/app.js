@@ -20,7 +20,7 @@ $("#submit-Button").on("click", function(event) {
 //Need to pull users input
 var trainName = $("#name").val().trim();
 var destination = $("#destination").val().trim();
-var trainTime = moment($("#time").val().trim(), "HH/mm").format("10:00");
+var trainTime =$("#time").val().trim();
 var frequency = $("#frequency").val().trim();
 
 //create a local or temproary object to contain train user info
@@ -63,13 +63,12 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
     console.log("time" + trainTime);
     console.log("frequency" + trainFrequency);
 
-$("#train-table > tbody").append("<tr><td>" + nameTrain + "</td><td>" + trainDestination + 
-"</td><td>" + trainFrequency + "</td><td>" + trainTime + "</td></tr>" + 
-nextTrain + "</td></tr>" );
-    
-tFrequency = 5;
 
-var firstTime = "06:00";
+    
+
+
+var currentTime = moment();
+console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
 var firstTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
 console.log(firstTimeConverted)
@@ -86,9 +85,12 @@ console.log(tRemainder);
 var tMinutesTillTrain = trainFrequency - tRemainder;
 console.log("Minutes till Train: " + tMinutesTillTrain);
 
-var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+var nextTrain = moment(currentTime).add(tMinutesTillTrain, "minutes").format("hh:mm");
 console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
+$("#train-table > tbody").append("<tr><td>" + nameTrain + "</td><td>" + trainDestination + 
+"</td><td>" + trainFrequency + "</td><td>" + trainTime + "</td></td>" + 
+moment(nextTrain).format("HH:mm") + "</td><td>"+ tMinutesTillTrain + "</td></tr>" );
 
 });
 
